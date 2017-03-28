@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -207,7 +207,7 @@
 <li><a href="#amd-vs-cmd">AMD vs CMD</a></li>
 <li><a href="#webpack">WebPack</a></li>
 </ol>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="title">autoDetect</span>()&#123;</div><div class="line">    console.log('ye, it <span class="keyword">is</span> written <span class="keyword">in</span> JavaScript!')</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">function <span class="title">autoDetect</span><span class="params">()</span></span>&#123;</div><div class="line">    console.log(<span class="string">'ye, it is written in JavaScript!'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="CommonJS-amp-Node"><a href="#CommonJS-amp-Node" class="headerlink" title="CommonJS &amp; Node"></a>CommonJS &amp; Node</h2><blockquote>
 <p>Javascript: not just for browsers any more! —— CommonJS Slogen</p>
 </blockquote>
@@ -253,7 +253,7 @@
 <p>当依赖模块非常多时，这种<strong>依赖前置</strong>的写法会显得有点奇怪，所以 AMD 给了一个语法糖， <strong>simplified CommonJS wrapping</strong>，借鉴了 CommonJS 的 require 就近风格，也更方便对 CommonJS 模块的兼容：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params">require</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> dependency1 = <span class="built_in">require</span>(<span class="string">'dependency1'</span>),</div><div class="line">        dependency2 = <span class="built_in">require</span>(<span class="string">'dependency2'</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>The AMD loader will parse out the <code>require(&#39;&#39;)</code> calls by using <code>Function.prototype.toString()</code>, then internally convert the above define call into this:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">define([<span class="string">'require'</span>, <span class="string">'dependency1'</span>, <span class="string">'dependency2'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">require</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> dependency1 = <span class="built_in">require</span>(<span class="string">'dependency1'</span>),</div><div class="line">        dependency2 = <span class="built_in">require</span>(<span class="string">'dependency2'</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">define([<span class="string">'require'</span>, <span class="string">'dependency1'</span>, <span class="string">'dependency2'</span>], function (require) &#123;</div><div class="line">    var dependency1 = require(<span class="string">'dependency1'</span>),</div><div class="line">        dependency2 = require(<span class="string">'dependency2'</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> function () &#123;&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>出于<code>Function.prototype.toString()</code>兼容性和性能的考虑，最好的做法还是做一次 <strong>optimized build</strong></p>
 <p>AMD 和 CommonJS 的核心争议如下：</p>
 <h3 id="1-执行时机"><a href="#1-执行时机" class="headerlink" title="1. 执行时机"></a>1. <strong>执行时机</strong></h3><p>Modules/1.0:</p>
